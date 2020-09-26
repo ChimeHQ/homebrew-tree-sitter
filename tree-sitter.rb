@@ -11,6 +11,19 @@ class TreeSitter < Formula
 
     lib.install "libtree-sitter.a"
     include.install "lib/include/tree_sitter"
+
+    pc_contents = <<~EOS
+    libdir=#{lib}
+    includedir=#{include}
+
+    Name: tree-sitter
+    Description: #{self.class.desc}
+    Version: 0.16.5
+    Libs: -L${libdir} -ltree-sitter
+    Clfags: -I${includedir}
+    EOS
+
+    (lib/"pkgconfig/libtree-sitter.pc").write pc_contents
   end
 
   test do
