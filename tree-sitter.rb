@@ -1,29 +1,16 @@
 class TreeSitter < Formula
   desc "Parser generator tool and incremental parsing library"
   homepage "https://tree-sitter.github.io/"
-  url "https://github.com/tree-sitter/tree-sitter/archive/0.16.5.tar.gz"
-  sha256 "3c6357d1a153c43f481d07f1a8743ed8b3134a2934689d564795a0d083ff7c7e"
+  url "https://github.com/tree-sitter/tree-sitter/archive/0.17.1.tar.gz"
+  sha256 "07b62f5d4408a488589d918676184340ce6b7ee3a0d78ca5b8fb9d31be18eba0"
   head "https://github.com/tree-sitter/tree-sitter.git"
 
   def install
-    # this shell script invokes clang or CC, and builds a .a with ar
-    system "script/build-lib"
+    ENV.append_to_cflags "-mmacosx-version-min=10.10"
+    ENV.append "LDFLAGS", "-mmacosx-version-min=10.10"
 
-    lib.install "libtree-sitter.a"
-    include.install "lib/include/tree_sitter"
-
-    pc_contents = <<~EOS
-    libdir=#{lib}
-    includedir=#{include}
-
-    Name: tree-sitter
-    Description: #{self.class.desc}
-    Version: 0.16.5
-    Libs: -L${libdir} -ltree-sitter
-    Cflags: -I${includedir}
-    EOS
-
-    (lib/"pkgconfig/libtree-sitter.pc").write pc_contents
+    system "make"
+    system "make", "install", "PREFIX=#{prefix}"
   end
 
   test do
