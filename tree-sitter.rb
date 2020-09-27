@@ -20,7 +20,7 @@ class TreeSitter < Formula
     Description: #{self.class.desc}
     Version: 0.16.5
     Libs: -L${libdir} -ltree-sitter
-    Clfags: -I${includedir}
+    Cflags: -I${includedir}
     EOS
 
     (lib/"pkgconfig/libtree-sitter.pc").write pc_contents

@@ -43,7 +43,7 @@ class TreeSitterGo < Formula
     Description: #{self.class.desc}
     Version: 0.16.1
     Libs: -L${libdir} -ltree-sitter-go
-    Clfags: -I${includedir}
+    Cflags: -I${includedir}
     EOS
 
     (lib/"pkgconfig/libtree-sitter-go.pc").write pc_contents
