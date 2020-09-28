@@ -33,7 +33,7 @@ class TreeSitterGo < Formula
     #endif  // TREE_SITTER_GO_H_
     EOS
     
-    (include/"tree_sitter_go.h").write go_h_contents
+    (include/"tree_sitter"/"go.h").write go_h_contents
     
     pc_contents = <<~EOS
     libdir=#{lib}
@@ -46,7 +46,7 @@ class TreeSitterGo < Formula
     Cflags: -I${includedir}
     EOS
 
-    (lib/"pkgconfig/libtree-sitter-go.pc").write pc_contents
+    (lib/"pkgconfig/tree-sitter-go.pc").write pc_contents
   end
 
   test do
